@@ -2,18 +2,23 @@ package com.simple_test.caculator;
 
 
 
-public class AddUseCaseControl {
+public class AddUseCaseControl implements InputBoundary{
     
     private ResponseData responseError = null;
     //fields
     private AddEntity addEntity = null;
-    private AddUIConsoleOutput addUIConsoleOutput = null;
+    //private AddUIConsoleOutput addUIConsoleOutput = null;
+    private OutputBoundary addUIConsoleOutput = null;
 
     //methods
 
     //constructor
+    public void setAddUIConsoleOutput(OutputBoundary addUIConsoleOutput) {
+        this.addUIConsoleOutput = addUIConsoleOutput;
+    }
+
     public AddUseCaseControl(){
-        addUIConsoleOutput = new AddUIConsoleOutput();
+       // addUIConsoleOutput = new AddUIConsoleOutput();
 
     }
 
@@ -26,12 +31,14 @@ public class AddUseCaseControl {
             //hợp lệ
         }else{
             //hông hjop lệ
-            responseError = new ResponseData();
-            responseError.content = "ERROR_INPUT";
-            responseError.strNumber1 = strNumber1;
-            responseError.strNumber2 = strNumber2;
+            //responseError = new ResponseData();
+            ResponseError error = new ResponseError();
+            error.content = "ERROR_INPUT";
+            //responseError.content = "ERROR_INPUT";
+            //responseError.strNumber1 = strNumber1;
+            //responseError.strNumber2 = strNumber2;
 
-            //addUIConsoleOutput.showError(responseError);
+            addUIConsoleOutput.showError(error);
 
         }
 
